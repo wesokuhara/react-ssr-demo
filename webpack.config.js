@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 
@@ -10,20 +9,14 @@ module.exports = {
     publicPath: '/'
   },
   target: 'node',
+  mode: process.env.NODE_ENV || 'none',
   externals: nodeExternals(),
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader'
       }
     ]
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: `'production'`
-      }
-    })
-  ]
+  }
 };
